@@ -1,0 +1,29 @@
+$cellHeight: 120px;
+
+.calendar_container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  max-width: 1000px;
+}
+
+.calendar_container > div {
+  height: $cellHeight;
+}
+
+.calendar_cell {
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    color: #8c8c8c;
+  }
+
+  &.active {
+    background-color: #cec9c9;
+  }
+}
