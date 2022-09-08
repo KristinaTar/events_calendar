@@ -5,6 +5,33 @@ body {
   font-family: sans-serif;
 }
 
+.main_container {
+  display: grid;
+
+  &--with_form {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr 3fr;
+  }
+}
+
+.add-event-date-picker_container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 980px;
+  align-items: center;
+  margin: 15px;
+}
+
+.addEvent_btn {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 15px;
+  border-radius: 25px;
+  border: none;
+  background-color: #25be2d;
+  color: #ffffff;
+}
 
 
 

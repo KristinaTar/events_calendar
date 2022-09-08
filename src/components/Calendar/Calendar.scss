@@ -8,7 +8,7 @@ $cellHeight: 120px;
 }
 
 .calendar_container > div {
-  height: $cellHeight;
+  min-height: $cellHeight;
 }
 
 .calendar_cell {
@@ -26,4 +26,20 @@ $cellHeight: 120px;
   &.active {
     background-color: #cec9c9;
   }
+
+  &.today {
+    background-color: #ddf1c8;
+  }
+}
+
+.eventInfo {
+  background-color: #54423e;
+  height: 1rem;
+  color: white;
+  padding: 1px;
+  margin-top: 4px;
+  border-radius: 3px;
+  font-size: 13px;
+  overflow: hidden;
+  cursor: pointer;
 }

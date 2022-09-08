@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import './Calendar.scss';
+import {formatDate} from "../../helpers/helpers";
 
 const DAYS = [
   "Su",
@@ -12,27 +13,36 @@ const DAYS = [
 ];
 
 type Props = {
+  calendarEvents: CalendarEvents;
   selectedDate: string;
-  setSelectedDate: (date:string)=> void;
+  editEvent: (key: string, index: number)=> void;
 }
-const Calendar: React.FC<Props> = ({selectedDate, setSelectedDate}) => {
+const Calendar: React.FC<Props> = ({calendarEvents, selectedDate, editEvent}) => {
   const splitDate = selectedDate.split('-');
   const year = parseInt(splitDate[0]);
   const month = parseInt(splitDate[1]) - 1;
   const date = new Date(year, month);
+  const today = new Date();
 
   const emptyCellsNum = date.getDay() === 0 ? 6 : date.getDay() - 1;
 
   let calendarContent: JSX.Element[] = [];
-  console.log(parseInt(splitDate[2]))
 
   for (let i = 0; i < emptyCellsNum; i++) {
-    calendarContent.push(<div></div>);
+    calendarContent.push(<div key={`emptyCell-${i}`}></div>);
   }
 
+
   do {
+    const key = formatDate(date);
+
     const cellContent = (<div
-      className={parseInt(splitDate[2]) === date.getDate()  ? "calendar_cell active": "calendar_cell"}
+      key={`cell-${date.getDate()}`}
+      className={
+        date.getDate() === today.getDate()
+        && today.getFullYear() === year
+        && today.getMonth() === month
+          ? "calendar_cell today" : "calendar_cell"}
     >
       <div className="calendar_cell__day">
         <div>
@@ -42,7 +52,20 @@ const Calendar: React.FC<Props> = ({selectedDate, setSelectedDate}) => {
           {date.getDate()}
         </div>
       </div>
-
+      <div>
+        {
+          calendarEvents[key]
+          && calendarEvents[key]!
+            .map((event, index) => (
+              <div
+                key={`${event.date}-${index}`}
+                className="eventInfo"
+                onClick={() => editEvent(key, index)}
+              >
+                {event.title}
+              </div>))
+        }
+      </div>
     </div>);
     calendarContent.push(cellContent);
 
