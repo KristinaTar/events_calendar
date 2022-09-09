@@ -1,3 +1,5 @@
+@import "../../vars.scss";
+
 input, textarea  {
   font-family: sans-serif;
   border-style: none none solid none;
@@ -21,14 +23,22 @@ input[type="date"], input[type="time"] {
 
 .addEvent_form_container {
   display: flex;
+  gap: 40px;
   flex-direction: column;
   padding: 30px;
   background-color: #f7f7f7;
 }
-
-.addEvent_form_container div {
-  margin-bottom: 40px;
+.addEvent_form_title_container {
+  display: flex;
+  flex-direction: column;
 }
+
+.addEvent_form_title--date {
+  padding-top: 5px;
+  font-size: 12px;
+  color: #7c7b7b;
+}
+
 
 .addEvent_form_header {
   display: flex;
@@ -60,15 +70,15 @@ input[type="date"], input[type="time"] {
   width: 100%;
 }
 
+.event-form-button-container {
+  display: flex;
+  justify-content: space-around;
+}
+
 .addEvent_form_saveBtn {
-  width: 100px;
-  text-transform: uppercase;
-  font-weight: 600;
-  padding: 15px;
-  border-radius: 25px;
-  border: none;
+ @include form-button;
   background-color: #2555be;
-  color: #ffffff;
+
 }
 
 
@@ -78,4 +88,12 @@ input[type="date"], input[type="time"] {
 
 .addEvent_form_title {
   font-size: 20px;
+  font-weight: 700;
+}
+
+.addEvent_form_deleteBtn {
+ @include form-button;
+  background-color: #be4125;
+
+
 }

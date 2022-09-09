@@ -3,52 +3,39 @@ import './App.scss';
 import DatePicker from "./DatePicker/DatePicker";
 import Calendar from "./Calendar/Calendar";
 import EventForm from "./EventForm/EventForm";
-import * as api from "../api/api";
 import {formatDate} from "../helpers/helpers";
-
+import * as api from "../api/api";
 
 function App() {
   const [calendarEvents, setCalendarEvents] = useState(api.getEvents());
   const [selectedDate, setSelectedDate] = useState(formatDate(new Date()));
-  const [selectedEvent, setSelectedEvent] = useState<null | CalendarEvent>(null);
-  const [selectedEventPath, setSelectedEventPath] = useState<undefined | { key: string, index: number }>(undefined);
-
-  const closeForm = useCallback(() => {
-    setOpenForm(false);
-  },[]);
-
-  const addNewEvent = useCallback((event: EventData) => {
-    const updatedEvents = api.addEvent(event);
-    setCalendarEvents(updatedEvents);
-  },[]);
-
-  const updateEvent = useCallback((key: string, index: number, event: EventData) => {
-    const updatedEvents = api.updateEvent(key, index, event);
-    setCalendarEvents(updatedEvents);
-  },[]);
-
-  const deleteEvent = useCallback((key: string, index: number) => {
-    const updatedEvents = api.deleteEvent(key, index);
-    setCalendarEvents(updatedEvents);
-  },[]);
-
+  const [selectedEventPath, setSelectedEventPath] = useState<null | { key: string, index: number }>(null);
   const [openForm, setOpenForm] = useState(false);
 
   const editEvent = (key: string, index: number) => {
     setOpenForm(true);
-    setSelectedEvent(calendarEvents[key]![index]);
+    setSelectedEventPath({key, index});
   }
+
+  const closeForm = useCallback(() => {
+    setOpenForm(false);
+    setSelectedEventPath(null);
+  },[]);
+
+  const updateCalendarEvents = useCallback(() => {
+    setCalendarEvents(api.getEvents());
+    setSelectedEventPath(null);
+    setOpenForm(false);
+  },[]);
 
   return (
     <div className={openForm ? "main_container--with_form" : "main_container"}>
-      {openForm && <div>
+      {openForm && <div className="event-form-container">
           <EventForm
+              calendarEvents={calendarEvents}
               closeForm={closeForm}
-              addNewEvent={addNewEvent}
-              updateEvent={updateEvent}
-              deleteEvent={deleteEvent}
-              selectedEvent={selectedEvent}
-              eventPath={selectedEventPath}
+              updateCalendarEvents={updateCalendarEvents}
+              selectedEventPath={selectedEventPath}
           />
       </div>}
       <div>

@@ -1,0 +1,11 @@
+$backgroundGrey: #f7f7f7;
+
+@mixin form-button {
+  width: 108px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 15px;
+  border-radius: 25px;
+  border: none;
+  color: #ffffff;
+}

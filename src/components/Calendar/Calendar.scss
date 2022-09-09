@@ -2,13 +2,22 @@ $cellHeight: 120px;
 
 .calendar_container {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  margin: auto;
+  @media screen and (min-width: 600px) {
+    grid-template-columns: repeat(7, 1fr);
+  }
   gap: 5px;
   max-width: 1000px;
 }
 
 .calendar_container > div {
   min-height: $cellHeight;
+}
+
+@media screen and (max-width: 600px) {
+  .empty-cell {
+    display: none;
+  }
 }
 
 .calendar_cell {

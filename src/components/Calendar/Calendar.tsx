@@ -29,7 +29,7 @@ const Calendar: React.FC<Props> = ({calendarEvents, selectedDate, editEvent}) =>
   let calendarContent: JSX.Element[] = [];
 
   for (let i = 0; i < emptyCellsNum; i++) {
-    calendarContent.push(<div key={`emptyCell-${i}`}></div>);
+    calendarContent.push(<div className="empty-cell" key={`emptyCell-${i}`}></div>);
   }
 
 
