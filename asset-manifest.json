@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/events_calendar/static/css/main.3be00701.css",
-    "main.js": "/events_calendar/static/js/main.4b07d58e.js",
+    "main.js": "/events_calendar/static/js/main.1bb8f1a2.js",
     "static/media/arrow-right.svg": "/events_calendar/static/media/arrow-right.f1f99c1d54c08cfec1cc9b22e1cb51c6.svg",
     "static/media/arrow-left.svg": "/events_calendar/static/media/arrow-left.cf38ad24197b2f8b571c9f7699219c3f.svg",
     "index.html": "/events_calendar/index.html",
     "main.3be00701.css.map": "/events_calendar/static/css/main.3be00701.css.map",
-    "main.4b07d58e.js.map": "/events_calendar/static/js/main.4b07d58e.js.map"
+    "main.1bb8f1a2.js.map": "/events_calendar/static/js/main.1bb8f1a2.js.map"
   },
   "entrypoints": [
     "static/css/main.3be00701.css",
-    "static/js/main.4b07d58e.js"
+    "static/js/main.1bb8f1a2.js"
   ]
 }
