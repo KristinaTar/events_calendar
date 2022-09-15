@@ -1,6 +1,7 @@
 import React from "react";
 import "./Calendar.scss";
-import { formatDate } from "../../helpers/helpers";
+import {formatDate} from "../../helpers/helpers";
+
 
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -8,8 +9,9 @@ type Props = {
   calendarEvents: CalendarEvents;
   selectedDate: string;
   editEvent: (key: string, index: number) => void;
+  selectDate: (date: string) => void;
 };
-const Calendar: React.FC<Props> = ({ calendarEvents, selectedDate, editEvent }) => {
+const Calendar: React.FC<Props> = ({ calendarEvents, selectDate, selectedDate, editEvent }) => {
   const splitDate = selectedDate.split("-");
   const year = parseInt(splitDate[0]);
   const month = parseInt(splitDate[1]) - 1;
@@ -42,7 +44,13 @@ const Calendar: React.FC<Props> = ({ calendarEvents, selectedDate, editEvent }) 
           <div>{DAYS[date.getDay()]}</div>
           <div>{date.getDate()}</div>
         </div>
-        <div className="calendar_cell__events_container">
+        <div
+          className="calendar_cell__events_container"
+          onClick={(e) => {
+            e.stopPropagation();
+            selectDate(key);
+          }}
+        >
           {calendarEvents[key] &&
             calendarEvents[key]!.map((event, index) => (
               <div

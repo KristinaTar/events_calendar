@@ -54,6 +54,8 @@ function App() {
             closeForm={closeForm}
             updateCalendarEvents={updateCalendarEvents}
             selectedEventPath={selectedEventPath}
+            selectedDate={selectedDate}
+            selectDate={selectDate}
           />
         </div>
       )}
@@ -67,6 +69,7 @@ function App() {
         <Calendar
           selectedDate={selectedDate}
           calendarEvents={calendarEvents}
+          selectDate={selectDate}
           editEvent={editEvent}
         />
       </div>

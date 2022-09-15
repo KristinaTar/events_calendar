@@ -7,17 +7,19 @@ type Props = {
   closeForm: () => void;
   updateCalendarEvents: () => void;
   selectedEventPath: { key: string; index: number } | null;
+  selectedDate: string;
+  selectDate: (date: string) => void;
 };
 
 const EventForm: React.FC<Props> = (props) => {
-  const { closeForm, updateCalendarEvents, calendarEvents, selectedEventPath } = props;
+  const { closeForm, updateCalendarEvents, calendarEvents, selectedEventPath, selectDate, selectedDate } = props;
 
   const [event, setEvent] = useState(() => {
     if (!selectedEventPath) {
       return {
         title: "",
         description: "",
-        date: "",
+        date: selectedDate,
         time: "",
       };
     }
@@ -104,8 +106,11 @@ const EventForm: React.FC<Props> = (props) => {
           type="date"
           id="date"
           name="date"
-          value={event.date}
-          onChange={(e) => setEvent({ ...event, date: e.target.value })}
+          value={selectedDate}
+          onChange={(e) => {
+            selectDate(e.target.value);
+            setEvent({...event, date: e.target.value});
+          }}
         />
       </div>
       <div>
@@ -129,7 +134,7 @@ const EventForm: React.FC<Props> = (props) => {
               setEvent({
                 title: "",
                 description: "",
-                date: "",
+                date: selectedDate,
                 time: "",
               });
             }}
@@ -154,7 +159,7 @@ const EventForm: React.FC<Props> = (props) => {
             setEvent({
               title: "",
               description: "",
-              date: "",
+              date: selectedDate,
               time: "",
             });
           }}
