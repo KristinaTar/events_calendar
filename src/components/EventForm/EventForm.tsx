@@ -128,8 +128,8 @@ const EventForm: React.FC<Props> = (props) => {
           <button
               type="button"
               className="addEvent_form_deleteBtn"
-              onClick={() => {
-                api.deleteEvent(selectedEventPath.key, selectedEventPath.index);
+              onClick={async () => {
+                await api.deleteEvent(selectedEventPath.key, selectedEventPath.index);
                 updateCalendarEvents();
                 setEvent({
                   title: "",
@@ -150,13 +150,13 @@ const EventForm: React.FC<Props> = (props) => {
         }
         type="button"
         className="addEvent_form_saveBtn"
-        onClick={() => {
+        onClick={async () => {
           if (!selectedEventPath) {
-            api.addEvent(event);
+            await api.addEvent(event);
             updateCalendarEvents();
           } else {
             const {key, index} = selectedEventPath;
-            api.updateEvent(key, index, event);
+            await api.updateEvent(key, index, event);
             updateCalendarEvents();
           }
 

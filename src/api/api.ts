@@ -1,4 +1,4 @@
-export function getEvents(): CalendarEvents {
+export async function getEvents(): Promise<CalendarEvents> {
   const storedData = localStorage.getItem("calendarEvents");
   if (!storedData) {
     return {};
@@ -6,13 +6,13 @@ export function getEvents(): CalendarEvents {
   return JSON.parse(storedData);
 }
 
-export function addEvent(event: EventData): CalendarEvents {
+export async function addEvent(event: EventData): Promise<CalendarEvents> {
   const newEvent: CalendarEvent = {
     ...event,
     created: Number(new Date()),
   };
 
-  const events = getEvents();
+  const events = await getEvents();
   const dayEvents = events[event.date];
   if (dayEvents) {
     events[event.date] = [...dayEvents, newEvent];
@@ -25,8 +25,12 @@ export function addEvent(event: EventData): CalendarEvents {
   return events;
 }
 
-export function updateEvent(key: string, index: number, event: EventData): CalendarEvents {
-  const events = getEvents();
+export async function updateEvent(
+  key: string,
+  index: number,
+  event: EventData
+): Promise<CalendarEvents> {
+  const events = await getEvents();
 
   const newEvent: CalendarEvent = {
     ...event,
@@ -50,8 +54,8 @@ export function updateEvent(key: string, index: number, event: EventData): Calen
   return events;
 }
 
-export function deleteEvent(key: string, index: number): CalendarEvents {
-  const events = getEvents();
+export async function deleteEvent(key: string, index: number): Promise<CalendarEvents> {
+  const events = await getEvents();
 
   events[key]!.splice(index, 1);
   localStorage.setItem("calendarEvents", JSON.stringify(events));

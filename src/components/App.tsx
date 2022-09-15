@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './App.scss';
 import DatePicker from "./DatePicker/DatePicker";
 import Calendar from "./Calendar/Calendar";
@@ -7,10 +7,16 @@ import {formatDate} from "../helpers/helpers";
 import * as api from "../api/api";
 
 function App() {
-  const [calendarEvents, setCalendarEvents] = useState(api.getEvents());
+  const [calendarEvents, setCalendarEvents] = useState<CalendarEvents>({});
   const [selectedDate, setSelectedDate] = useState(formatDate(new Date()));
   const [selectedEventPath, setSelectedEventPath] = useState<null | { key: string, index: number }>(null);
   const [openForm, setOpenForm] = useState(false);
+
+  useEffect(() => {
+    api.getEvents().then((events) => {
+      setCalendarEvents(events);
+    });
+  }, []);
 
   const editEvent = (key: string, index: number) => {
     setOpenForm(true);
@@ -23,7 +29,9 @@ function App() {
   },[]);
 
   const updateCalendarEvents = useCallback(() => {
-    setCalendarEvents(api.getEvents());
+    api.getEvents().then((events) => {
+      setCalendarEvents(events);
+    });
     setSelectedEventPath(null);
     setOpenForm(false);
   },[]);

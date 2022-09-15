@@ -24,9 +24,8 @@ type Props = {
 }
 const DatePicker: React.FC<Props> = ({selectedDate, setSelectedDate}) => {
   const splitDate = selectedDate.split('-');
-  const year = splitDate[0];
+  const selectedYear = splitDate[0];
   const month = MONTHS[parseInt(splitDate[1]) - 1];
-
 
   const decreaseMonth = () => {
     let monthNum: number | string = parseInt(splitDate[1]) - 1;
@@ -62,7 +61,7 @@ const DatePicker: React.FC<Props> = ({selectedDate, setSelectedDate}) => {
     <div>
       <span>
         <img className="date-picker-arrow" src={arrowLeft} alt="arrowLeft" onClick={decreaseMonth}/>
-        {`${month} ${year}`}
+        {`${month} ${selectedYear}`}
         <img className="date-picker-arrow" src={arrowRight} alt="arrowRight" onClick={increaseMonth}/>
       </span>
       <form className="date-picker-form">

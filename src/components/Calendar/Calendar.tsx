@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import './Calendar.scss';
 import {formatDate} from "../../helpers/helpers";
 
@@ -26,7 +26,7 @@ const Calendar: React.FC<Props> = ({calendarEvents, selectedDate, editEvent}) =>
 
   const emptyCellsNum = date.getDay() === 0 ? 6 : date.getDay() - 1;
 
-  let calendarContent: JSX.Element[] = [];
+  const calendarContent: JSX.Element[] = [];
 
   for (let i = 0; i < emptyCellsNum; i++) {
     calendarContent.push(<div className="empty-cell" key={`emptyCell-${i}`}></div>);
