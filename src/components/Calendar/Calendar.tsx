@@ -1,7 +1,6 @@
 import React from "react";
 import "./Calendar.scss";
-import {formatDate} from "../../helpers/helpers";
-
+import { formatDate } from "../../helpers/helpers";
 
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 

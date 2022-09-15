@@ -12,7 +12,14 @@ type Props = {
 };
 
 const EventForm: React.FC<Props> = (props) => {
-  const { closeForm, updateCalendarEvents, calendarEvents, selectedEventPath, selectDate, selectedDate } = props;
+  const {
+    closeForm,
+    updateCalendarEvents,
+    calendarEvents,
+    selectedEventPath,
+    selectDate,
+    selectedDate,
+  } = props;
 
   const [event, setEvent] = useState(() => {
     if (!selectedEventPath) {
@@ -109,7 +116,7 @@ const EventForm: React.FC<Props> = (props) => {
           value={selectedDate}
           onChange={(e) => {
             selectDate(e.target.value);
-            setEvent({...event, date: e.target.value});
+            setEvent({ ...event, date: e.target.value });
           }}
         />
       </div>
