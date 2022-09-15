@@ -36,13 +36,10 @@ body {
   max-width: 980px;
   align-items: center;
   margin: 15px auto;
+  padding: 1px;
 }
 
 .addEvent_btn {
   @include form-button;
   background-color: #25be2d;
-
 }
-
-
-

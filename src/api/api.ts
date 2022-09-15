@@ -3,6 +3,7 @@ export async function getEvents(): Promise<CalendarEvents> {
   if (!storedData) {
     return {};
   }
+
   return JSON.parse(storedData);
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
-import arrowRight from '../../images/arrow-right.svg'
-import arrowLeft from '../../images/arrow-left.svg'
-import './DatePicker.scss';
+import arrowRight from "../../images/arrow-right.svg";
+import arrowLeft from "../../images/arrow-left.svg";
+import "./DatePicker.scss";
 
 const MONTHS = [
   "January",
@@ -20,10 +20,10 @@ const MONTHS = [
 
 type Props = {
   selectedDate: string;
-  setSelectedDate: (date: string) => void;
-}
-const DatePicker: React.FC<Props> = ({selectedDate, setSelectedDate}) => {
-  const splitDate = selectedDate.split('-');
+  selectDate: (date: string) => void;
+};
+const DatePicker: React.FC<Props> = ({ selectedDate, selectDate }) => {
+  const splitDate = selectedDate.split("-");
   const selectedYear = splitDate[0];
   const month = MONTHS[parseInt(splitDate[1]) - 1];
 
@@ -35,34 +35,42 @@ const DatePicker: React.FC<Props> = ({selectedDate, setSelectedDate}) => {
       year--;
     }
     if (monthNum < 10) {
-      monthNum = '0' + monthNum;
+      monthNum = "0" + monthNum;
     }
-    const newDate = `${year}-${monthNum}-01`
-    setSelectedDate(newDate);
-  }
+    const newDate = `${year}-${monthNum}-01`;
+    selectDate(newDate);
+  };
 
   const increaseMonth = () => {
     let monthNum: number | string = parseInt(splitDate[1]) + 1;
     let year = parseInt(splitDate[0]);
     if (monthNum === 13) {
       monthNum = 1;
-      year++
+      year++;
     }
     if (monthNum < 10) {
-      monthNum = '0' + monthNum;
+      monthNum = "0" + monthNum;
     }
-    const newDate = `${year}-${monthNum}-01`
-    setSelectedDate(newDate);
-  }
-
-
+    const newDate = `${year}-${monthNum}-01`;
+    selectDate(newDate);
+  };
 
   return (
     <div>
       <span>
-        <img className="date-picker-arrow" src={arrowLeft} alt="arrowLeft" onClick={decreaseMonth}/>
+        <img
+          className="date-picker-arrow"
+          src={arrowLeft}
+          alt="arrowLeft"
+          onClick={decreaseMonth}
+        />
         {`${month} ${selectedYear}`}
-        <img className="date-picker-arrow" src={arrowRight} alt="arrowRight" onClick={increaseMonth}/>
+        <img
+          className="date-picker-arrow"
+          src={arrowRight}
+          alt="arrowRight"
+          onClick={increaseMonth}
+        />
       </span>
       <form className="date-picker-form">
         <div className="date-picker-container">
@@ -72,7 +80,7 @@ const DatePicker: React.FC<Props> = ({selectedDate, setSelectedDate}) => {
             name="selected_date"
             value={selectedDate}
             onChange={(e) => {
-              setSelectedDate(e.target.value);
+              selectDate(e.target.value);
             }}
           />
           <span className="date-picker-button">
@@ -82,6 +90,6 @@ const DatePicker: React.FC<Props> = ({selectedDate, setSelectedDate}) => {
       </form>
     </div>
   );
-}
+};
 
 export default DatePicker;

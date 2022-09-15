@@ -1,8 +1,8 @@
-.date-picker-form input[type=date]::-webkit-datetime-edit {
+.date-picker-form input[type="date"]::-webkit-datetime-edit {
   color: rgba(0, 0, 0, 0);
 }
 
-.date-picker-form input[type=date] {
+.date-picker-form input[type="date"] {
   width: 20px;
   height: 20px;
   border: none;
@@ -26,7 +26,7 @@
   right: 17px;
   width: 25px;
   height: 25px;
-  background: #fff;
+  background: white;
   pointer-events: none;
 }
 
@@ -40,7 +40,6 @@
 .date-picker-arrow {
   width: 20px;
   vertical-align: sub;
-
 }
 
 .date-picker-form {

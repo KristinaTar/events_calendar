@@ -1,3 +1,4 @@
+@import "../../vars.scss";
 $cellHeight: 120px;
 
 .calendar_container {
@@ -22,22 +23,39 @@ $cellHeight: 120px;
 
 .calendar_cell {
   box-sizing: border-box;
-  background-color: #f8f8f8;
+  background-color: $backgroundGrey;
   padding: 10px;
 
   &__day {
     display: flex;
     justify-content: space-between;
     font-weight: 700;
-    color: #8c8c8c;
-  }
-
-  &.active {
-    background-color: #cec9c9;
+    color: $baseGrey;
   }
 
   &.today {
     background-color: #ddf1c8;
+  }
+
+  &__events_container {
+    height: 70px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $baseGrey;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
   }
 }
 

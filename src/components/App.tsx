@@ -1,15 +1,19 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import './App.scss';
+import React, { useCallback, useEffect, useState } from "react";
+import "./App.scss";
 import DatePicker from "./DatePicker/DatePicker";
 import Calendar from "./Calendar/Calendar";
 import EventForm from "./EventForm/EventForm";
-import {formatDate} from "../helpers/helpers";
+import { formatDate } from "../helpers/helpers";
 import * as api from "../api/api";
 
 function App() {
   const [calendarEvents, setCalendarEvents] = useState<CalendarEvents>({});
-  const [selectedDate, setSelectedDate] = useState(formatDate(new Date()));
-  const [selectedEventPath, setSelectedEventPath] = useState<null | { key: string, index: number }>(null);
+  const [selectedDate, setSelectedDate] = useState(
+    localStorage.getItem("calendarSelectedDate") || formatDate(new Date())
+  );
+  const [selectedEventPath, setSelectedEventPath] = useState<null | { key: string; index: number }>(
+    null
+  );
   const [openForm, setOpenForm] = useState(false);
 
   useEffect(() => {
@@ -20,13 +24,13 @@ function App() {
 
   const editEvent = (key: string, index: number) => {
     setOpenForm(true);
-    setSelectedEventPath({key, index});
-  }
+    setSelectedEventPath({ key, index });
+  };
 
   const closeForm = useCallback(() => {
     setOpenForm(false);
     setSelectedEventPath(null);
-  },[]);
+  }, []);
 
   const updateCalendarEvents = useCallback(() => {
     api.getEvents().then((events) => {
@@ -34,27 +38,31 @@ function App() {
     });
     setSelectedEventPath(null);
     setOpenForm(false);
-  },[]);
+  }, []);
+
+  const selectDate = useCallback((date: string) => {
+    setSelectedDate(date);
+    localStorage.setItem("calendarSelectedDate", date);
+  }, []);
 
   return (
     <div className={openForm ? "main_container--with_form" : "main_container"}>
-      {openForm && <div className="event-form-container">
+      {openForm && (
+        <div className="event-form-container">
           <EventForm
-              calendarEvents={calendarEvents}
-              closeForm={closeForm}
-              updateCalendarEvents={updateCalendarEvents}
-              selectedEventPath={selectedEventPath}
+            calendarEvents={calendarEvents}
+            closeForm={closeForm}
+            updateCalendarEvents={updateCalendarEvents}
+            selectedEventPath={selectedEventPath}
           />
-      </div>}
+        </div>
+      )}
       <div>
         <div className="add-event-date-picker_container">
-          <button
-            className="addEvent_btn"
-            onClick={() => setOpenForm(true)}
-          >
+          <button className="addEvent_btn" onClick={() => setOpenForm(true)}>
             Add event
           </button>
-          <DatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+          <DatePicker selectedDate={selectedDate} selectDate={selectDate} />
         </div>
         <Calendar
           selectedDate={selectedDate}
